@@ -5,6 +5,12 @@
 
 </script>
 
+<style lang="postcss">
+  :global(body) {
+    @apply bg-surface-50-900-token;
+  }
+</style>
+
 <AppRail class="fixed top-0 left-0 h-full w-18  surface-200 z-20">
   <svelte:fragment slot="lead">
     <AppRailAnchor href="/" title="Home">
