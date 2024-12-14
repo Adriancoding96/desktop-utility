@@ -1,13 +1,10 @@
 <script lang="ts">
 
-  let name = $state("");
-  let greetMsg = $state("");
-
+  import HeaderBox from "../components/HeaderBox.svelte";
 </script>
 
 <main class="container">
-  <h1 class="h1 p-24">Welcome Adrian</h1>
-  
+ <HeaderBox header="Welcome Adrian" subHeader="Viewing Home Screen"/> 
 </main>
 
 
