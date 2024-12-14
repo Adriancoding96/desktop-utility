@@ -2,7 +2,7 @@ use std::process::Command;
 
 
 #[tauri::command]
-fn launch_firefox() -> Result<(), String> {
+fn launch_firefox(address: String) -> Result<(), String> {
     let command = if cfg!(target_os = "windows") {
         "firefox.exe"
     } else if cfg!(target_os = "macos") {
@@ -11,7 +11,7 @@ fn launch_firefox() -> Result<(), String> {
         "firefox"
     };
 
-    let args = vec!["https://www.mozilla.org"];
+    let args = vec![address];
 
     tauri::async_runtime::spawn(async move {
         let result = Command::new(command)
@@ -30,12 +30,31 @@ fn launch_firefox() -> Result<(), String> {
     Ok(())
 }
 
+#[tauri::command]
+fn launch_application(command: String) -> Result<(), String> {
+
+    tauri::async_runtime::spawn(async move {
+        let result = Command::new(command)
+            .spawn();
+
+        match result {
+            Ok(_) => {
+                println!("Application launched successfully");
+            }
+            Err(e) => {
+                eprintln!("Failed to launch Application: {}", e);
+            }
+        }
+    });
+    Ok(())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_shell::init())
-        .invoke_handler(tauri::generate_handler![launch_firefox])
+        .invoke_handler(tauri::generate_handler![launch_firefox, launch_application])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
