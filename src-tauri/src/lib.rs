@@ -1,6 +1,5 @@
 use std::process::Command;
 
-
 #[tauri::command]
 fn launch_firefox(address: String) -> Result<(), String> {
     let command = if cfg!(target_os = "windows") {
@@ -48,6 +47,14 @@ fn launch_application(command: String) -> Result<(), String> {
     });
     Ok(())
 }
+
+
+#[tauri::command]
+fn name(path: String, contents: String ) {
+    println!("{}", contents);
+}
+
+pub mod db;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
