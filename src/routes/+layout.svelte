@@ -25,6 +25,9 @@
     <AppRailAnchor href="/chat" title="Chat">
       <i class="fa-solid fa-comments text-xl"></i>
     </AppRailAnchor>
+    <AppRailAnchor href="/ai" title="Chat">
+      <i class="fa-solid fa-robot text-xl"></i>
+    </AppRailAnchor>
   </svelte:fragment>
 
   <svelte:fragment slot="trail">
